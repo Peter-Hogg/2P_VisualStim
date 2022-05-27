@@ -1,4 +1,4 @@
-function STACheckerStim(win, winRect)
+function  [time, sType, r] = STACheckerStim(win, winRect)
     % Get the size of the on screen window
     [screenXpixels, screenYpixels] = Screen('WindowSize', win);
     
@@ -43,7 +43,7 @@ function STACheckerStim(win, winRect)
 
 
 
-
+    time = clock;
     Screen('FillRect', win, randPixel, Rects);
 
     % Flip to the screen
@@ -54,6 +54,6 @@ function STACheckerStim(win, winRect)
 
 
     Screen('Flip', win);
-
+    sType = 'psuedRandSTA'
 end
 

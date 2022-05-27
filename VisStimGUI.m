@@ -1,6 +1,20 @@
 function StimControl
+
+% Log all Stim to an array
+stimlog.time = {};
+stimlog.stim_type = {};
+stimlog.stim_info = {};
+% Create a directory to save the stimLog array as
+if ~exist('stimLogs', 'dir')
+mkdir('stimLogs')
+end
+
+
 StimControlPanel = figure('Color','w');
 [myWin, winRect] = CreateStimWindow();
+
+
+
 %StimPanel = uifigure;
 OFFStimBut = uicontrol(gcf,'Style', 'push', ...
                            'String', 'OFF Stim', ...
@@ -40,7 +54,10 @@ set(userAngel, 'MinorTickSpacing',15, 'MajorTickSpacing',90, 'SnapToTicks',true,
 
 
 function OffStimPush(source,event)
-    OFFStim(myWin);
+    [t, sType, stimD] = OFFStim(myWin);
+    stimlog.time = [stimlog.time, {t}]
+    stimlog.stim_type = [stimlog.stim_type, {sType}]
+    stimlog.stim_info = [stimlog.stim_info, {stimD}]
 end
 
 function userGrating(source,event)
@@ -53,7 +70,18 @@ function randoGrating(source,event)
 end
 
 function randSTAStimuli(source,event)
-    STACheckerStim(myWin, winRect)
+    [t, sType, stimD] = STACheckerStim(myWin, winRect)
+    stimlog.time = [stimlog.time, {t}]
+    stimlog.stim_type = [stimlog.stim_type, {sType}]
+    stimlog.stim_info = [stimlog.stim_info, {stimD}]
+
+end
+
+
+function saveStimLog(source,event)
+    saveTime = clock();
+    fileName = ['stimLog', saveTime(4:6), '.csv']
+    writetable(stimLog, fullfile('stimLogss', fileName) )
 end
 
 function closeStimWindow(source,event)

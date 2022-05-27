@@ -11,7 +11,7 @@ black = BlackIndex(screenid);
 
 % Open a fullscreen onscreen window on that display, choose a background
 % color of 128 = gray, i.e. 50% max intensity:
-[win, winRect] = Screen('OpenWindow', screenid, white, [0,0,500,500]);
+[win, winRect] = Screen('OpenWindow', 3, white);
 Screen('Flip', win) 
 Screen('Fillrect', win, white)
 
