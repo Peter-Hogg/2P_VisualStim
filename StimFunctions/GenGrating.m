@@ -1,4 +1,4 @@
-function GenGrating(win, angle, cyclespersecond, freq, gratingsize, internalRotation)
+function GenGrating(win, angle, cyclespersecond, freq, gratingsize, internalRotation, color)
 % Display an animated grating, using the new Screen('DrawTexture') command.
 % This demo demonstrates fast drawing of such a grating via use of procedural
 % texture mapping. It only works on hardware with support for the GLSL
@@ -16,9 +16,7 @@ function GenGrating(win, angle, cyclespersecond, freq, gratingsize, internalRota
 
 % Make sure this is running on OpenGL Psychtoolbox:
 AssertOpenGL;
-screenid = max(Screen('Screens'));
-white = WhiteIndex(screenid);
-black = BlackIndex(screenid);
+
 % Initial stimulus parameters for the grating patch:
 
 if nargin < 5 || isempty(internalRotation)
@@ -62,7 +60,7 @@ end
 % the sine wave up to 1 = maximum white in the maxima. Amplitudes of more
 % than 0.5 don't make sense, as parts of the grating would lie outside the
 % displayable range for your computers displays:
-amplitude = 0.5;
+amplitude = .5;
 
 
 % Make sure the GLSL shading language is supported:
@@ -79,7 +77,7 @@ phaseincrement = (cyclespersecond * 360) * ifi;
 
 % Build a procedural sine grating texture for a grating with a support of
 % res(1) x res(2) pixels and a RGB color offset of 0.5 -- a 50% gray.
-gratingtex = CreateProceduralSineGrating(win, res(1), res(2), [0.5 0.5 0.5 0.0]);
+gratingtex = CreateProceduralSineGrating(win, res(1), res(2),[0 0 .25 .5]);
 
 % Wait for release of all keys on keyboard, then sync us to retrace:
 vbl = Screen('Flip', win);
@@ -110,7 +108,7 @@ while endTime < duration([0,0,5]);
     
     
 % Leave Stim Screen Blank
-Screen('Fillrect', win, white);
+Screen('Fillrect', win, color);
 Screen('Flip', win);
 
 

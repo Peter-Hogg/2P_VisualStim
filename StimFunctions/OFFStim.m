@@ -1,4 +1,4 @@
-function [time, sType, stimData] = OFFStim(win)
+function [time, sType, stimData] = OFFStim(win, color)
 % Full Field Off Simulus - 50 ms 
 screenid = max(Screen('Screens'));
 
@@ -10,7 +10,7 @@ time = clock;
 Screen('Flip', win) ;
 
 pause(.050);
-Screen('Fillrect', win, white);
+Screen('Fillrect', win, color);
 Screen('Flip', win);
 sType = 'OFF';
 stimData = 0;

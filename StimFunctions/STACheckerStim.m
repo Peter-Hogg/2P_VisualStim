@@ -1,4 +1,4 @@
-function  [time, sType, r] = STACheckerStim(win, winRect)
+function  [time, sType, r] = STACheckerStim(win, winRect, color)
     % Get the size of the on screen window
     [screenXpixels, screenYpixels] = Screen('WindowSize', win);
     
@@ -31,7 +31,7 @@ function  [time, sType, r] = STACheckerStim(win, winRect)
     % Make our rectangle coordinates
     randPixel = nan(3, 3);
     for i = 1:numSquares
-        randPixel(:, i) = r(i)*255; r(i)*255; r(i)*255;
+        randPixel(:, i) = [r(i)*0, r(i)*0, r(i)*255];
     end
 
 

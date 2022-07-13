@@ -8,10 +8,11 @@ stimlog.stim_info = {};
 if ~exist('stimLogs', 'dir')
 mkdir('stimLogs')
 end
-
+% Background color
+color = [0,0,255];
 
 StimControlPanel = figure('Color','w');
-[myWin, winRect] = CreateStimWindow();
+[myWin, winRect] = CreateStimWindow(color);
 
 
 
@@ -54,7 +55,7 @@ set(userAngel, 'MinorTickSpacing',15, 'MajorTickSpacing',90, 'SnapToTicks',true,
 
 
 function OffStimPush(source,event)
-    [t, sType, stimD] = OFFStim(myWin);
+    [t, sType, stimD] = OFFStim(myWin, color);
     stimlog.time = [stimlog.time, {t}]
     stimlog.stim_type = [stimlog.stim_type, {sType}]
     stimlog.stim_info = [stimlog.stim_info, {stimD}]
@@ -62,11 +63,11 @@ end
 
 function userGrating(source,event)
     ang = userAngel.getValue
-    GenGrating(myWin, ang, 2, .034, 450, 450)
+    GenGrating(myWin, ang, 2, .034, 450, 450, color)
 end
 
 function randoGrating(source,event)
-    pseudoRandGrating(myWin)
+    pseudoRandGrating(myWin, color)
 end
 
 function randSTAStimuli(source,event)
